@@ -1,0 +1,50 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #34495e;
+    color: white;
+  }
+  
+  .header h1 {
+    margin: 0;
+    font-size: 24px;
+  }
+  
+  .user-info {
+    display: flex;
+    align-items: center;
+  }
+  
+  .user-info span {
+    margin-right: 20px;
+  }
+  
+  .user-info button {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+  }
+  
+  @media (max-width: 768px) {
+    .header {
+      padding: 10px;
+    }
+  
+    .header h1 {
+      font-size: 20px;
+    }
+  
+    .user-info span {
+      margin-right: 10px;
+    }
+  
+    .user-info button {
+      padding: 5px 10px;
+    }
+  }
+  

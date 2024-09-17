@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard</title>
+
+    <!-- bootstrap link -->
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css"
+      integrity="sha512-jnSuA4Ss2PkkikSOLtYs8BlYIeeIK1h99ty4YfvRPAlzr377vr3CXDb7sb7eEEBYjDtcYj+AjBH3FLv5uSJuXg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"
+      integrity="sha512-7Pi/otdlbbCR+LnW+F7PwFcSDJOuUJB3OxtEHbg4vSMvzvJjde4Po1v4BR9Gdc9aXNUNFVUY+SK51wWT8WF0Gg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+
+    <!-- fontAwesome link -->
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+      integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <!-- DataTable link  -->
+
+    <link
+      href="https://cdn.datatables.net/v/bs4/dt-2.1.4/datatables.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <style>
+    .nav-link:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+      color: #f8f9fa;
+      text-decoration: none;
+      border-radius: 5px;
+    }
+  </style>
+  <body>
+    <nav class="navbar navbar-dark bg-dark px-3">
+      <div class="d-flex justify-content-between align-items-center w-100">
+        <div>
+          <button class="btn btn-outline-light" id="menu-toggle">
+            <i class="fa-solid fa-bars"></i>
+          </button>
+          <span class="navbar-brand ml-6 h1">Admin Dashboard</span>
+        </div>
+        <div class="d-flex align-items-center">
+          <a
+            href="http://localhost:5173/chat"
+            target="_blank"
+            class="btn btn-outline-light me-3 d-flex align-items-center"
+          >
+            <i class="fa-brands fa-rocketchat me-2"></i>
+            <span>Chat</span>
+          </a>
+
+          <a
+            href="/add"
+            class="btn btn-outline-light me-3 d-flex align-items-center"
+          >
+            <i class="fa-solid fa-user-plus me-2"></i>
+            <span>Add</span>
+          </a>
+
+          <!-- <input
+            type="text"
+            class="form-control me-3"
+            placeholder="Search..."
+          /> -->
+          <form action="/logout" method="POST">
+            <button type="submit" class="btn btn-danger">Logout</button>
+          </form>
+        </div>
+      </div>
+    </nav>
+
+    <div class="d-flex">
+      <div
+        class="bg-dark text-white p-3 vh-100"
+        id="sidebar"
+        style="min-width: 250px; display: none"
+      >
+        <div class="d-flex justify-content-end">
+          <button class="btn btn-outline-light" id="close-icon">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+        <ul class="nav flex-column mt-4">
+          <li class="nav-item mb-2">
+            <a href="/dashboard" class="nav-link text-white">Users</a>
+          </li>
+          <li class="nav-item mb-2">
+            <a href="/videos" class="nav-link text-white">Videos</a>
+          </li>
+          <li class="nav-item mb-2">
+            <a href="/upload" class="nav-link text-white">Upload Videos</a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="container-fluid p-4">
+        <h1>User Details</h1>
+        <% if (message) { %>
+        <div
+          class="alert alert-dismissible fade show alert-<%= message.type %>"
+          role="alert"
+        >
+          <button
+            class="btn-close"
+            type="button"
+            data-bs-dismiss="alert"
+            aria-label="close"
+          ></button>
+          <strong><%= message.message %></strong>
+        </div>
+        <% } %>
+        <div class="table-responsive my-4">
+          <% if (users != "") { %>
+          <table class="table table-striped table-bordered text-center my-3">
+            <thead class="align-middle table-dark">
+              <tr>
+                <th style="text-align: center">ID</th>
+                <th style="text-align: center">Image</th>
+                <th style="text-align: center">Name</th>
+                <th style="text-align: center">E-Mail</th>
+                <th style="text-align: center">Phone</th>
+                <th style="text-align: center">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% users.forEach((row, index) => { %>
+              <tr class="align-middle">
+                <td style="text-align: center"><%= index + 1 %></td>
+                <td>
+                  <img
+                    src="<%= row.image %>"
+                    alt="User Image"
+                    class="img-thumbnail"
+                    style="width: 50px"
+                  />
+                </td>
+                <td><%= row.name %></td>
+                <td><%= row.email %></td>
+                <td style="text-align: center"><%= row.phone %></td>
+                <td>
+                  <a href="/edit/<%= row._id %>" class="btn btn-sm btn-success"
+                    ><i class="fas fa-edit"></i> Edit</a
+                  >
+                  <a href="/delete/<%= row._id %>" class="btn btn-sm btn-danger"
+                    ><i class="fas fa-trash-alt"></i> Delete</a
+                  >
+                </td>
+              </tr>
+              <% }) %>
+            </tbody>
+          </table>
+
+          <% } else { %>
+
+          <h1 class="text-center text-secondary mt-5">
+            No users found in the database
+          </h1>
+
+          <% } %>
+        </div>
+      </div>
+    </div>
+
+    <!-- Script -->
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+      integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+
+    <script src="https://cdn.datatables.net/v/bs4/dt-2.1.4/datatables.min.js"></script>
+
+    <script>
+      $(function () {
+        $("table").DataTable({
+          order: [[0, "desc"]],
+          // columnsDefs: [{target: 0, orderable: false}]
+        });
+      });
+    </script>
+
+    <script>
+      const toggleButton = document.getElementById("menu-toggle");
+      const closeButton = document.getElementById("close-icon");
+      const sidebar = document.getElementById("sidebar");
+
+      toggleButton.addEventListener("click", () => {
+        sidebar.style.display = "block";
+      });
+
+      closeButton.addEventListener("click", () => {
+        sidebar.style.display = "none";
+      });
+    </script>
+  </body>
+</html>

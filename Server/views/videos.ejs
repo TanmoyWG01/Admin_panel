@@ -1,0 +1,49 @@
+<%- include("layouts/header") %>
+
+<div class="container mt-5">
+  <div class="table-responsive">
+    <% if (videos != "") { %>
+      <table class="table table-bordered table-hover text-center align-middle">
+        <thead class="table-dark">
+          <tr>
+            <th>ID</th>
+            <th>Image</th>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% videos.forEach((row,index) => { %>
+          <tr>
+            <td><%= index + 1 %></td>
+            <td>
+              <img src="/thumbnails/<%= row.thumbnail %>" alt="Thumbnail" class="img-thumbnail" style="width: 150px; height: 80px;">
+            </td>
+            <td><%= row.name %></td>
+            <td><%= row.description %></td>
+            <td>
+              <!-- <a href="/editVideo/" class="btn btn-sm btn-success"><i class="fas fa-edit"></i> Edit</a> -->
+              <a href="/deleteVideo/<%= row._id %>" class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i> Delete</a>
+            </td>
+          </tr>
+          <% }) %>
+          <!-- Additional rows can be added here -->
+        </tbody>
+      </table>
+    <% } %>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"  integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script>
+    $(document).ready(()=>{
+      $("table").DataTable({
+        order:[0, 'desc']
+      })
+    })
+  </script>
+
+
+<%- include("layouts/footer") %>

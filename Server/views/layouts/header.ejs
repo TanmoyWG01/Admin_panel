@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Header</title>
+
+    <!-- bootstrap link -->
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css"
+      integrity="sha512-jnSuA4Ss2PkkikSOLtYs8BlYIeeIK1h99ty4YfvRPAlzr377vr3CXDb7sb7eEEBYjDtcYj+AjBH3FLv5uSJuXg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"
+      integrity="sha512-7Pi/otdlbbCR+LnW+F7PwFcSDJOuUJB3OxtEHbg4vSMvzvJjde4Po1v4BR9Gdc9aXNUNFVUY+SK51wWT8WF0Gg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- fontAwesome link -->
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+      integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+     <!-- DataTable link  -->
+
+     <link href="https://cdn.datatables.net/v/bs4/dt-2.1.4/datatables.min.css" rel="stylesheet">
+
+     <style>
+      .nav-link:hover {
+        background-color: rgba(255, 255, 255, 0.1); 
+        color: #f8f9fa; 
+        text-decoration: none; 
+        border-radius: 5px; 
+      }
+    </style>
+
+  </head>
+  <body>
+    <nav class="navbar navbar-dark bg-dark px-3">
+      <div class="d-flex justify-content-between align-items-center w-100">
+        <div>
+          <button class="btn btn-outline-light" id="menu-toggle">
+            <i class="fa-solid fa-bars"></i>
+          </button>
+          <span class="navbar-brand mb-2 h1">Dashboard</span>
+        </div>
+        <div class="d-flex align-items-center">
+         
+          <input
+            type="text"
+            class="form-control me-3"
+            placeholder="Search..."
+          />
+          <form action="/logout" method="POST">
+            <button type="submit" class="btn btn-danger">Logout</button>
+          </form>
+        </div>
+      </div>
+    </nav>
+
+    <div class="d-flex">
+      <div
+        class="bg-dark text-white p-3 vh-100"
+        id="sidebar"
+        style="min-width: 250px; display: none"
+      >
+        <div class="d-flex justify-content-end">
+          <button class="btn btn-outline-light" id="close-icon">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+        <ul class="nav flex-column mt-4">
+          <li class="nav-item mb-2">
+            <a href="/dashboard" class="nav-link text-white">Users</a>
+          </li>
+          <li class="nav-item mb-2">
+            <a href="/videos" class="nav-link text-white">Videos</a>
+          </li>
+          <li class="nav-item mb-2">
+            <a href="/upload" class="nav-link text-white">Upload Videos</a>
+          </li>
+        </ul>
+      </div>
+
